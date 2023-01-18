@@ -1,10 +1,17 @@
 const jsonServer = require("json-server");
 const fs = require("fs");
+const { v4 } = require("uuid");
+const bodyParser = require("body-parser");
 const server = jsonServer.create();
-const router = jsonServer.router("./db.json");
-const db = JSON.parse(fs.readFileSync("./db.json", "UTF-8").toString());
+const filePath = "./db.json";
+const router = jsonServer.router(filePath);
+const db = JSON.parse(fs.readFileSync(filePath, "UTF-8").toString());
 const middlewares = jsonServer.defaults();
 const cors = require("cors");
+
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
+server.use(cors());
 
 server.get("/service-provider", (req, res) => {
   const { query } = req;
@@ -34,6 +41,24 @@ server.get("/service-provider", (req, res) => {
   } catch (err) {
     console.log(err);
     return res.sendStatus(500).json(err);
+  }
+});
+
+server.post("/generate-plan", (req, res) => {
+  try {
+    const { exercises, warmUp } = db.allExercises;
+    const plan = {
+      ...req.body,
+      id: v4(),
+      exercises: exercises.slice(0, 3),
+      warmUp: warmUp.slice(0, 3),
+    };
+    const wholeDb = { ...db, plans: [...db.plans, plan] };
+    fs.writeFile(filePath, JSON.stringify(wholeDb), () => {
+      return res.json(plan.id).status(201);
+    });
+  } catch (err) {
+    return res.json(err).status(404);
   }
 });
 
