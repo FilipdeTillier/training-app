@@ -1,8 +1,5 @@
-import { ChangeEvent, ReactElement, useMemo, useState } from "react";
+import { ReactElement } from "react";
 import classNames from "classnames";
-
-import React from "react";
-
 import Select, { CSSObjectWithLabel } from "react-select";
 
 export type SELECT_OPTION = {
@@ -32,12 +29,15 @@ export const SelectInput = ({
   classNamePrefix,
 }: SelectProps): ReactElement => {
   const styles = {
+    control: (base: CSSObjectWithLabel) => ({
+      ...base,
+    }),
     menuList: (base: CSSObjectWithLabel) => ({
       ...base,
-
       "::-webkit-scrollbar": {
         width: "4px",
         height: "0px",
+        backgroundColor: "transparent",
       },
       "::-webkit-scrollbar-track": {
         background: "#f1f1f1",
@@ -57,8 +57,11 @@ export const SelectInput = ({
       instanceId={name}
       value={options.find((el) => el.value === value)}
       name={name}
-      className={classNames(className)}
-      classNamePrefix={classNamePrefix}
+      className={classNames(
+        "border-gray-200 focus-within:border-blue-600",
+        className
+      )}
+      classNamePrefix={"border-gray-200 focus-within:border-blue-600"}
       id={id || name}
       styles={styles}
       onChange={(e) => e?.value && onChange(e?.value)}

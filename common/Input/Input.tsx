@@ -1,14 +1,20 @@
 import { TPropsWithClassName } from "@common/interfaces";
 import classNames from "classnames";
-import { ChangeEvent, HTMLInputTypeAttribute } from "react";
+import {
+  ChangeEvent,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+} from "react";
 import { InputType } from "zlib";
 
 type InputProps = {
   onChange: (e: ChangeEvent<unknown>) => void;
-  value: string;
+  value: string | number;
   name: string;
   type?: HTMLInputTypeAttribute;
   id?: string;
+  min?: number;
+  max?: number;
   placeholder?: string;
   label?: string;
 };
@@ -19,6 +25,8 @@ export const Input = ({
   name,
   value,
   className,
+  min,
+  max,
   label = "",
   placeholder = "",
   id = name,
@@ -37,6 +45,8 @@ export const Input = ({
         placeholder={placeholder}
         onChange={onChange}
         value={value}
+        min={min}
+        max={max}
         className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
       />
 

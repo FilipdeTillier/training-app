@@ -1,12 +1,20 @@
 {
   "appName": "123",
-  "search": "Szukaj",
-  "butcher": "Rzeźnik",
-  "hunter": "Myśliwy",
-  "reviews": "Opinie",
-  "leaflet": {
-    "marker": {
-      "addReview": "Dodaj"
-    }
+  "ectomorph": "Ektomorfik",
+  "endomorph": "Endomorfik",
+  "mesomorph": "Mezomorfik",
+  "muscles_grow": "Wzrost masy mięśniowej",
+  "losing_weight": "Utrata masy ciała",
+  "performance_and_fitness": "Większa wydolność",
+  "basicInformation": {
+    "userName": "Imie i nazwisko",
+    "trainingPeriod": "Plan treningowy na okres",
+    "weight": "Waga",
+    "height": "Wzrost",
+    "bodyType": "Budowa ciała",
+    "goal": "Cel"
+  },
+  "exercise": {
+    "day": "Dzień"
   }
 }

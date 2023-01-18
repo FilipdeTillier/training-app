@@ -6,7 +6,7 @@ import { Fragment } from "react";
 
 import messages_pl from "../intl/pl.json";
 import { wrapper } from "../store/store";
-import { Languages, selectLanguageState } from "../store/configSlice";
+import { Languages } from "../store/configSlice";
 import { Container } from "../common/Container";
 
 import "../styles/globals.scss";
@@ -22,9 +22,6 @@ function App({ Component, ...rest }: AppProps) {
   const { pageProps } = props;
 
   const flattedTranslations = flatTranslations(messages[lang]);
-
-  console.log(flattedTranslations);
-
   return (
     <Provider store={store}>
       <IntlProvider
